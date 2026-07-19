@@ -1,0 +1,14 @@
+name : testGo 
+on : 
+  pull_request:   # 풀 리퀘스트가 생성되면 실행 
+    paths: ['go/excellent/**.go'] # 단, go/excellent/ 폴더 내의 .go 파일이 변경될 때만 실행
+jobs :
+  test :  
+    runs-on : ubuntu-latest
+    steps :
+      - uses : actions/checkout@v4  # 스텝1 : 체크아웃
+      - uses : actions/setup-go@v5  # 스텝2 : 언어셋업(go 환경설정)
+        with :
+          go-version : 1.21
+      - name : Run tests            # 스텝3 : 테스트 실행
+        run : go test ./go/excellent/*.go 
