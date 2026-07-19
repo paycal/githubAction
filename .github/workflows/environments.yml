@@ -1,0 +1,12 @@
+name : Environments
+on : push
+jobs :
+  run :
+    runs-on : ubuntu-latest
+    env :
+      BRANCH : master  # 현재 브랜치 이름을 환경 변수로 설정
+    steps :
+      - run : echo "${BRANCH}" # 셸 명령어에서 잡의 환경 변수 BRANCH의 값을 출력
+      - uses : actions/checkout@v4 
+        with :
+          ref : ${{ env.BRANCH }}  # env 콘텍스트를 경유해서 잡 환경변수를 참조함
